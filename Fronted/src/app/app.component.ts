@@ -18,4 +18,9 @@ export class AppComponent implements OnInit {
   GetAll() {
     this.msSqlHttpClient.getAll().subscribe(response => this.workers = response);
   }
+
+  Delete(id: number){
+    this.msSqlHttpClient.Delete(id).subscribe();
+    this.GetAll();
+  }
 }

@@ -1,4 +1,5 @@
 export interface IWorker{
+    IdWorker: number;
     Name: string;
     Surname: String;
     Age: number;
