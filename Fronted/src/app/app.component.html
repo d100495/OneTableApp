@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Age</th>
+    <th>Payment</th>
+    <th>Office</th>
+    <th>Pesel</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let model of workers">
+      <td>{{model.Name}}</td>
+      <td>{{model.Surname}}</td>
+      <td>{{model.Age}}</td>
+      <td>{{model.Payment}}</td>
+      <td>{{model.Office}}</td>
+      <td>{{model.Pesel}}</td>
+      <button onclick="Delete(model.idWorker)">Delete</button>
+    </tr>
+    
+  </tbody>
+</table>
