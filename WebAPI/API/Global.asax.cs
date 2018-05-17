@@ -17,10 +17,7 @@ namespace API
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-            var config = GlobalConfiguration.Configuration;
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            RouteConfig.RegisterRoutes(RouteTable.Routes);            
         }
     }
 }
