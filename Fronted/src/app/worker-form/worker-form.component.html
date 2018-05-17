@@ -1,0 +1,23 @@
+<form [formGroup]="workerForm">
+  <div class="form-group">
+    <label class="center-block">Name:
+      <input class="form-control" formControlName="name">
+    </label>
+    <label class="center-block">Surname:
+      <input class="form-control" formControlName="surname">
+    </label>
+    <label class="center-block">Age:
+      <input class="form-control" formControlName="age">
+    </label>
+    <label class="center-block">Payment:
+      <input class="form-control" formControlName="payment">
+    </label>
+    <label class="center-block">Office:
+      <input class="form-control" formControlName="office">
+    </label>
+    <label class="center-block">Pesel:
+      <input class="form-control" formControlName="pesel">
+    </label>
+  </div>
+</form>
+<button (click)="AddWorker()">Submit</button>
