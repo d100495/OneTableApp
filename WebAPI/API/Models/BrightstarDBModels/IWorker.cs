@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace API.Models.BrightstarDBModels
 {
-        [Entity]
-        public interface IWorker
-        {
-            int IdWorker { get; set; }
-            string Name { get; set; }
-            string Surname { get; set; }
-            int Age { get; set; }
-            decimal Payment { get; set; }
-            string Office { get; set; }
-            int Pesel { get; set; }
-        }
+    [Entity]
+    public interface IWorker
+    {
+        int IdWorker { get; set; }
+        string Name { get; set; }
+        string Surname { get; set; }
+        int Age { get; set; }
+        decimal Payment { get; set; }
+        string Office { get; set; }
+        int Pesel { get; set; }
+    }
 }
