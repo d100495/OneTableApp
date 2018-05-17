@@ -2,88 +2,66 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace API.Controllers
 {
-    public class BrightstarWorkersController : Controller
+    public class BrightstarWorkersController : ApiController
     {
-        WorkerEntityContext context = new WorkerEntityContext();
+        WorkerEntityContext context = new WorkerEntityContext("Type=embedded;StoresDirectory=a:\\brightstardb;StoreName=test");
 
-        // GET: BrightstarWorkers
-        public ActionResult Index()
+        // GET: api/BrightstarWorkers
+        public IEnumerable<string> Get()
         {
-            var workers = from d in context.Workers
-                          select d;
-            return View(workers.ToList());
-        }
-
-        // GET: BrightstarWorkers/Details/5
-        public ActionResult Details(int id)
-        {
-            var worker = context.Workers.FirstOrDefault(d => d.IdWorker.Equals(id));
-            return worker == null ? View("404") : View(worker);
-        }
-
-        // GET: BrightstarWorkers/Create
-        public ActionResult Create()
-        {
-            var w = new Worker();
-            return View(w);
-        }
-
-        // POST: BrightstarWorkers/Create
-        [HttpPost]
-        public ActionResult Create(Worker worker)
-        {
-            if (ModelState.IsValid)
+            List<string> workers = new List<string>();
+            foreach (Worker w in context.Workers)
             {
-                context.Workers.Add(worker);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                string s = w.IdWorker + " " + w.Name + " " + w.Surname;
+                workers.Add(s);
             }
-            return View();
+            return workers;
         }
 
-        // GET: BrightstarWorkers/Edit/5
-        public ActionResult Edit(int id)
+        // GET: api/BrightstarWorkers/5
+        public string Get(int id)
         {
-            var worker = context.Workers.FirstOrDefault(d => d.IdWorker.Equals(id));
-            return worker == null ? View("404") : View(worker);
+            return context.Workers.Where(c => c.IdWorker.Equals(id)).FirstOrDefault().ToString();
         }
 
-        // POST: BrightstarWorkers/Edit/5
-        [HttpPost]
-        public ActionResult Edit(Worker worker)
+        // POST: api/BrightstarWorkers
+        public string Post(Worker worker)
         {
-            if (ModelState.IsValid)
-            {
-                worker.Context = context;
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
-
-        // GET: BrightstarWorkers/Delete/5
-        public ActionResult Delete(int id)
-        {
-            var worker = context.Workers.Where(d => d.IdWorker.Equals(id)).FirstOrDefault();
-            return worker == null ? View("404") : View(worker);
-        }
-
-        // POST: BrightstarWorkers/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            var worker = context.Workers.FirstOrDefault(d => d.IdWorker.Equals(id));
             if (worker != null)
             {
-                context.DeleteObject(worker);
+                Worker w = new Worker();
+                w.IdWorker = worker.IdWorker;
+                w.Name = worker.Name;
+                w.Surname = worker.Surname;
+                w.Age = worker.Age;
+                w.Payment = worker.Payment;
+                w.Office = worker.Office;
+                w.Pesel = worker.Pesel;
+                context.Workers.Add(w);
                 context.SaveChanges();
+                return "OK";
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return "Empty flag";
+            }
+        }
+
+        // PUT: api/BrightstarWorkers/5
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE: api/BrightstarWorkers/5
+        public void Delete(int id)
+        {
         }
     }
 }
