@@ -9,18 +9,45 @@ import { IWorker } from '../Models/IWorker';
 })
 export class AppComponent implements OnInit {
   workers: IWorker[];
+  model: IWorker;
+  add = false;
+  clickedId: number;
   constructor(private msSqlHttpClient: WorkersFromMsSqlDatabaseService) { }
 
   ngOnInit(): void {
     this.GetAll();
   }
 
+  OnSubmit(value: boolean) {
+    this.add = value;
+    this.GetAll();
+  }
+  OnClick(id: number) {
+    this.clickedId = id;
+    this.model = this.workers.find(x => x.IdWorker === id);
+  }
+
+  Toggle() {
+    this.add = !this.add;
+  }
   GetAll() {
     this.msSqlHttpClient.getAll().subscribe(response => this.workers = response);
   }
 
-  Delete(id: number){
-    this.msSqlHttpClient.Delete(id).subscribe();
+  Delete() {
+    this.msSqlHttpClient.Delete(this.clickedId).subscribe();
+    this.GetAll();
+  }
+
+
+  ChangeDatabaseToBrighstar() {
+    this.msSqlHttpClient.urlAPi = 'BrightstarWorkers';
+    this.GetAll();
+    console.log(this.workers);
+  }
+
+  ChangeDatabaseToSql() {
+    this.msSqlHttpClient.urlAPi = 'Workers';
     this.GetAll();
   }
 }

@@ -22,6 +22,6 @@ import { WorkerFormComponent } from './worker-form/worker-form.component';
     ReactiveFormsModule
   ],
   providers: [WorkersFromMsSqlDatabaseService],
-  bootstrap: [AppComponent, WorkerFormComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

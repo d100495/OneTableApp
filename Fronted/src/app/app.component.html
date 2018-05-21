@@ -1,22 +1,37 @@
-<table>
-  <thead>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Age</th>
-    <th>Payment</th>
-    <th>Office</th>
-    <th>Pesel</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let model of workers">
-      <td>{{model.Name}}</td>
-      <td>{{model.Surname}}</td>
-      <td>{{model.Age}}</td>
-      <td>{{model.Payment}}</td>
-      <td>{{model.Office}}</td>
-      <td>{{model.Pesel}}</td>
-      <button (click)="Delete(model.IdWorker)">Delete</button>
-    </tr>
-    
-  </tbody>
-</table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Age</th>
+          <th>Payment</th>
+          <th>Office</th>
+          <th>Pesel</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let model of workers" (click)="OnClick(model.IdWorker)" [class.active]="model.IdWorker == clickedId">
+            <td>{{model.Name}}</td>
+            <td>{{model.Surname}}</td>
+            <td>{{model.Age}}</td>
+            <td>{{model.Payment}}</td>
+            <td>{{model.Office}}</td>
+            <td>{{model.Pesel}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <button (click)="Toggle()" class="btn btn-light">Add/Update</button>
+      <button (click)="Delete()" class="btn btn-light">Delete</button>
+      <div *ngIf="add">
+        <app-worker-form (submit)="OnSubmit($event)"
+        [worker]="model"></app-worker-form>
+      </div>
+      <button (click)="ChangeDatabaseToBrighstar()" class="btn btn-light">NoSql</button>
+      <button (click)="ChangeDatabaseToSql()" class="btn btn-light">Sql</button>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
