@@ -13,7 +13,7 @@ namespace API.Controllers
 {
     public class BrightstarWorkersController : ApiController
     {
-        WorkerEntityContext context = new WorkerEntityContext("Type=embedded;StoresDirectory=a:\\brightstardb;StoreName=test");
+        WorkerEntityContext context = new WorkerEntityContext("Type=embedded;StoresDirectory=d:\\brightstardb;StoreName=test");
 
         // GET: api/BrightstarWorkers
         public IEnumerable<Worker> Get()

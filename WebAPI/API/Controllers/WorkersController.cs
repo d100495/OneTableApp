@@ -37,6 +37,7 @@ namespace API.Controllers
         }
 
         // PUT: api/Workers/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutWorkers(int id, Workers workers)
         {
